@@ -13,7 +13,20 @@ class MyFirstCdkProjectStack(core.Stack):
             self,
             "myBucketId",
             bucket_name="my-first-project-bucket-22113344",
-            encryption=_s3.BucketEncryption.KMS_MANAGED,
-            versioned=False
+            encryption=_s3.BucketEncryption.S3_MANAGED,
+            versioned=False,
+            block_public_access=_s3.BlockPublicAccess.BLOCK_ALL
 
+        )
+
+        mybucket=_s3.Bucket(self,
+        "myBucketid1",
+        )
+
+        output1=core.CfnOutput(
+            self,
+            "myBucketOutput1",
+            value=mybucket.bucket_name,
+            description=f"My First CDK bucket",
+            export_name="myBucketOutput1"
         )
